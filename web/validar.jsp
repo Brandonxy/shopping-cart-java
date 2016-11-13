@@ -12,6 +12,8 @@
                 <td>ALGO</td>
                 <td>ALGO1</td>
                 <td>ALGO2</td>
+                <td>ALGO2</td>
+                <td>ALGO2</td>
             </tr>
         </table>
     </body>
