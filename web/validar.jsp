@@ -9,11 +9,7 @@
         <h1>Hello World!</h1>
         <table>
             <tr>
-                <td>ALGO</td>
-                <td>ALGO1</td>
-                <td>ALGO2</td>
-                <td>ALGO2</td>
-                <td>ALGO2</td>
+                <td>No se que poner aqupi</td>
             </tr>
         </table>
     </body>
