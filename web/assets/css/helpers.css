@@ -1,0 +1,20 @@
+
+/* Helpers */
+.btn {
+    font-size: 14px;
+    border: none;
+    text-align: center;
+    width: auto;
+    padding: 10px 15px;
+    color: #fff;
+    background:  #fcaf3e;
+    transition: .3s all ease-out;
+    border-radius: 4px;
+}
+.btn:hover {
+    background: #f57900;
+    cursor: pointer;
+}
+.btn:active {
+    background: #ce5c00;
+}

@@ -2,11 +2,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="app.css"/>
+        <%@include file="includes/head.jsp" %> 
         <title>Taller de programacion 2</title>
     </head>
     <body>
-        <h1>Hi bitches</h1>
+        <div class="wrapper">
+            
+            <%@include file="includes/header.jsp" %>
+            
+            <section class="content">
+                <button class="btn">Aceptar</button>
+            </section>
+
+            <%@include file="includes/footer.jsp" %>
+            
+        </div>
     </body>
 </html>
