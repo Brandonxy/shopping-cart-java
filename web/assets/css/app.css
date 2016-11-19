@@ -2,17 +2,10 @@
     Created on : 13-11-2016
     Author     : BrandonG
 */
-@import url('helpers.css');
-
 body {
     margin: 0px;
-    font-family: 'Open Sans', Arial;
+    font-family: 'Poppins', Arial;
     font-size: 16px;
-    background-image: url('../img/background.jpg');
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 .wrapper {
     padding: 10px;
@@ -30,28 +23,29 @@ body {
 }
 .header .header-ctn {
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto !important;
     text-align: center;
 }
 
 .header .header-ctn .logo-container{
     width: 30%;
-    background: yellow;
-    display: inline-block;
+    display: inline-block !important;
 }
 
 .header .header-ctn nav {
     height: inherit;
     width: 65%;
-    display: inline-block;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    display: inline-block !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
     vertical-align: middle;
 }
 
 .header .header-ctn nav ul {
     width: auto;
     text-align: right;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 .header .header-ctn nav ul li {
     display: inline-block;
@@ -59,7 +53,7 @@ body {
 }
 .header .header-ctn nav ul li a {
     border: 4px solid transparent;
-    border-radius: 4px;
+    border-radius: 3px;
     padding: 2px 10px;
     color: #fff;
     text-decoration: none;
@@ -71,6 +65,9 @@ body {
 .header .header-ctn nav ul li a.register {
     background: orange;
 }
+.header .header-ctn nav ul li a.login {
+    border: 1px solid #fcaf3e;
+}
 .header .header-ctn nav ul li a.register:hover {
     color: #fff;
     background: #f57900;
@@ -80,4 +77,42 @@ body {
 .content {
     width: 85%;
     margin: 0 auto;
+    padding-top: 50px;
+}
+/* Login page */
+/* Helpers */
+.btn {
+    font-size: 14px;
+    border: none;
+    text-align: center;
+    padding: 10px 15px;
+    color: #fff;
+    background:  #fcaf3e;
+    transition: .3s all ease-out;
+    border-radius: 4px;
+}
+.btn:hover {
+    background: #f57900 !important;
+    cursor: pointer;
+}
+.btn:active {
+    background: #ce5c00 !important;
+}
+/* Inputs */
+.textfield {
+    border-radius: 0px;
+}.textfield:focus {
+    box-shadow: 0px 0px 5px 3px #f57900;
+}
+/* About page */
+
+.about-container {
+    padding-top: 30px;
+}
+.about-container .shp-cart-icon { font-size: 200px; color: #fcaf3e; }
+.about-list {
+    text-align: left;
+    list-style: none;
+}.about-list li {
+    padding-bottom: 16px;
 }
