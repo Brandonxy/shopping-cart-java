@@ -18,10 +18,11 @@
                         </div>
                         <div class="col-md-4 col-md-offset-4 text-center">
                             <hr>
-                            <form class="form-vertical" role="form" method="POST" action="{{ url('/login') }}">
+                            <form class="form-vertical" role="form" method="POST" 
+                                  action="ValidarUsuario.jsp">
 
                                         <div class="form-group">
-                                            <label for="email">Correo Electrónico</label>
+                                            <label for="email">Run</label>
                                             <input id="email" type="email" class="form-control textfield" name="email" required autofocus>
                                         </div>
 
