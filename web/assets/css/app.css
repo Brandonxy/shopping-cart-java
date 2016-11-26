@@ -5,7 +5,7 @@
 body {
     margin: 0px;
     font-family: 'Poppins', Arial;
-    font-size: 16px;
+    font-size: 14px;
 }
 .wrapper {
     padding: 10px;
@@ -103,6 +103,11 @@ body {
     border-radius: 0px;
 }.textfield:focus {
     box-shadow: 0px 0px 5px 3px #f57900;
+}
+
+/* Registration form */
+.form {
+    border: 1px solid #f57900;
 }
 /* About page */
 
