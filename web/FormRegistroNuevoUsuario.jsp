@@ -4,12 +4,12 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../assets/css/app.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@include file="../includes/head.jsp" %>
+        <%@include file="includes/head.jsp" %>
         <title>Crear una nueva cuenta</title>
     </head>
     <body>
         <div class="wrapper">
-            <%@include file="../includes/header.jsp" %>
+            <%@include file="includes/header.jsp" %>
             
             <div class="container" style="padding-top: 20px;">
 
@@ -24,7 +24,7 @@
                             </small>
                             <hr>
                             
-                            <form action="registrar.do" method="post" class="inline-form">
+                            <form action="registrarUsuarioPost.jsp" method="post" class="inline-form">
                                 
                                 
                                 <div class="row">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <%@include file="../includes/footer.jsp" %>
+            <%@include file="includes/footer.jsp" %>
         </div>
     </body>
 </html>
