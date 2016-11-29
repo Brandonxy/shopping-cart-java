@@ -4,9 +4,25 @@
         <servlet-name>registrarUsuario</servlet-name>
         <servlet-class>administrador.registrarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateCart</servlet-name>
+        <servlet-class>cart.UpdateCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddItem</servlet-name>
+        <servlet-class>cart.AddItem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>registrarUsuario</servlet-name>
         <url-pattern>/registrar.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateCart</servlet-name>
+        <url-pattern>/update_cart.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddItem</servlet-name>
+        <url-pattern>/add_item.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
