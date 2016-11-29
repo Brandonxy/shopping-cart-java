@@ -54,7 +54,7 @@ public class UpdateCart extends HttpServlet {
                     
                     for(CartItem ci : cartItems) {
                         
-                            /* El producto existe en la base de datos */
+                            /* El producto existe en la carro de compras */
 
                             if(ci.getId() == productId) {
                                 
