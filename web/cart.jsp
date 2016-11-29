@@ -95,9 +95,9 @@
                                                     </div>
                                                 </form>
                                                 <div class="col-xs-2">
-                                                    <button type="button" class="btn btn-link btn-xs">
+                                                    <a href="remove_item.do?productId=<%= p.getId() %>" class="btn btn-link btn-xs">
                                                         <span class="fa fa-trash"> </span>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
