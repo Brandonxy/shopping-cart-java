@@ -4,12 +4,12 @@
     <head>
         <link rel="stylesheet" type="text/css" href="../assets/css/app.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@include file="../includes/head.jsp" %>
+        <%@include file="includes/head.jsp" %>
         <title>Crear una nueva cuenta</title>
     </head>
     <body>
         <div class="wrapper">
-            <%@include file="../includes/header.jsp" %>
+            <%@include file="includes/header.jsp" %>
             
             <div class="container" style="padding-top: 20px;">
 
@@ -18,13 +18,13 @@
                         <div class="panel panel-default form">
                         <div class="panel-body">
 
-                            <h3>Crea una cuenta</h3>
+                            <h3>Crea una <strong>cuenta</strong></h3>
                             <small>
                                 Registrate para empezar a comprar todo tipo de productos.
                             </small>
                             <hr>
                             
-                            <form action="registrar.do" method="post" class="inline-form">
+                            <form action="registrarUsuarioPost.jsp" method="post" class="inline-form">
                                 
                                 
                                 <div class="row">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <%@include file="../includes/footer.jsp" %>
+            <%@include file="includes/footer.jsp" %>
         </div>
     </body>
 </html>

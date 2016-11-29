@@ -1,0 +1,69 @@
+package bd;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Conexion {
+    
+    protected static Connection conn = ConexionBD.getConexion();
+    
+    protected static String table = null;
+
+    private static Statement st;
+    private static String query;
+    
+    public Conexion() {
+    }
+    
+    public void close() {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("No se pudo cerrar la conexión");
+        }
+    }
+    
+    public static ResultSet all(String tableName, String orderBy) { 
+        try {
+            
+            Statement st = conn.createStatement();
+            
+            String query = "select * from " + tableName + " order by id "  + orderBy;
+            
+            ResultSet rs = st.executeQuery(query);
+            
+            return rs;
+            
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+        
+        return null;
+    }
+    
+    public static ResultSet find(String tableName, int id) {
+        ResultSet rs = null;
+        try {
+            
+            Statement st = conn.createStatement();
+            
+            String query = "select * from "  + tableName + " where id=" + id;
+            
+            rs = st.executeQuery(query);
+            
+            if(!rs.first()) {
+                return null;
+            }
+            
+            
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+        
+        return rs;
+    }
+}
