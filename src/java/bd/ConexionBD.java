@@ -3,6 +3,8 @@ package bd;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConexionBD {
     
@@ -15,9 +17,13 @@ public class ConexionBD {
     public static Connection getConexion() {
         
         try {
-            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/inacap", "inacap", "inacap");           
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/inacap", "inacap", "inacap");   
+            return connection;
         } catch(SQLException e) {
             System.out.println("Error de conexión de base de datos");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return null;
