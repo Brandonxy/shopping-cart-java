@@ -2,8 +2,6 @@
 Tienda online Taller de programación 2 - Inacap
 
 # CompraFy
-Database structure for the project
-
 
 # Database support
 
