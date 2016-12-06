@@ -6,4 +6,4 @@ Tienda online Taller de programación 2 - Inacap
 
 #Database support
 
-currently is developed to works only with Apache Derby Database
+currently is developed to works only with **Apache Derby Database**
