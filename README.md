@@ -1,8 +1,9 @@
-# CompraFy
+#TallerProgramacion2
 
-A Basic Shopping cart and Forum
+Tienda online Taller de programación 2 - Inacap
 
+#CompraFy
 
-# Database support
+#Database support
 
-currently is developed to works only with **Apache Derby Database**
+currently is developed to works only with Apache Derby Database
