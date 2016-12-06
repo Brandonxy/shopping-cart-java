@@ -55,7 +55,7 @@
                                     <% for(CartItem p : cartItems) { %>
 
                                         <div class="row">
-                                            <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+                                            <div class="col-xs-2"><img class="img-responsive" src="<%= Url.linkTo("images/") + p.getFoto() %>">
                                             </div>
                                             <div class="col-xs-4">
                                                 <h4 class="product-name">

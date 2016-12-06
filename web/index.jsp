@@ -1,3 +1,4 @@
+<%@page import="bd.Url"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="bd.Producto"%>
 <%@page import="java.util.LinkedList"%>
@@ -20,7 +21,7 @@
                 <div class="fade-home">
                     <div class="ctn-slide">
                         <h1>Bienvenido a CompraFy!</h1>
-                        <p>Podrás encontrar todo tipo de productos, desde computadores hasta condones y mucha droga!.</p>
+                        <p>Podrás encontrar todo tipo de productos, desde computadores hasta doctops!.</p>
                         <p><a class="btn btn-primary btn-lg" href="#" role="button">Saber mas</a></p>
                     </div>
                 </div>
@@ -32,7 +33,7 @@
                         <% while(productos.next()) { %>
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail">
-                                    <img src="http://placehold.it/200x200" alt="..." class="img-responsive img-product">
+                                    <img src="<%= Url.linkTo("images/") + productos.getString("foto") %>" alt="..." class="img-responsive img-product">
                                     <div class="caption">
                                         <p class="product-title">
                                             <%= productos.getString("nombre") %>
