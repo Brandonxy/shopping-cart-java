@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
-        <servlet-name>registrarUsuario</servlet-name>
-        <servlet-class>administrador.registrarUsuario</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>updateCart</servlet-name>
         <servlet-class>cart.UpdateCart</servlet-class>
     </servlet>
@@ -12,10 +8,18 @@
         <servlet-name>AddItem</servlet-name>
         <servlet-class>cart.AddItem</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>registrarUsuario</servlet-name>
-        <url-pattern>/registrar.do</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>RemoveUItem</servlet-name>
+        <servlet-class>cart.RemoveUItem</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>auth.Register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CloseSession</servlet-name>
+        <servlet-class>auth.CloseSession</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>updateCart</servlet-name>
         <url-pattern>/update_cart.do</url-pattern>
@@ -23,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>AddItem</servlet-name>
         <url-pattern>/add_item.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveUItem</servlet-name>
+        <url-pattern>/remove_item.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CloseSession</servlet-name>
+        <url-pattern>/sign_out.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
