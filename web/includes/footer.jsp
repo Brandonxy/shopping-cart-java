@@ -1,8 +1,6 @@
-<footer class="footer">
-    <div class="container">
+<footer class="container footer">
     <div class="row">
-        <hr>
-        <div class="col-lg-12">
+        <div class="col-md-12">
           <div class="col-md-8">
             <a href="#">Terms of Service</a> | <a href="#">Privacy</a>    
           </div>
@@ -11,5 +9,4 @@
           </div>
         </div>
     </div>
-  </div>
 </footer>
