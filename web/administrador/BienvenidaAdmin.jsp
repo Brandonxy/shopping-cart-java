@@ -1,18 +1,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="bd.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    
-    HttpSession hs = request.getSession(false);
-    
-    User user = (User) hs.getAttribute("User");
-    
-    if(hs.getAttribute("User") == null){
-        response.sendRedirect("../index.jsp");
-    }
-    
-%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,7 +17,7 @@
         <div class="wrapper">
             <%@include file="../includes/header.jsp" %>
                 <div class="wrapper text-center">
-                    <h1><strong>Bienvenido <%= user.getNombre() %></strong></h1>
+                    <h1><strong>Bienvenido <%= User.auth(request).getNombre() %></strong></h1>
                     <h1><strong>Sección Administrador</strong></h1>
                     <p>Menú de Opciones para el Administrador</p>
                     <p>Seleccione aquí todas las operaciones</p>
