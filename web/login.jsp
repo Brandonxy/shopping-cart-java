@@ -18,11 +18,11 @@
                     <div class="col-md-4 col-md-offset-4 text-center">
                         <hr>
                         <form class="form-vertical" role="form" method="POST" 
-                              action="ValidarUsuario.jsp">
+                              action="login_post.do">
 
                                     <div class="form-group">
                                         <label for="email">Run</label>
-                                        <input id="email" type="email" class="form-control textfield" name="email" required autofocus>
+                                        <input id="email" type="text" class="form-control textfield" name="run" required autofocus>
                                     </div>
 
                                     <div class="form-group">
