@@ -1,16 +1,18 @@
 
 package bd;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class User extends Conexion {
     
-    private int id;
+    private Long id;
     private String nombre;
     private String apellido;
     private String run;
     private int edad;
     private String telefono;
 
-    public User(int id, String nombre, String apellido, String run, int edad, String telefono) {
+    public User(Long id, String nombre, String apellido, String run, int edad, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -19,11 +21,22 @@ public class User extends Conexion {
         this.telefono = telefono;
     }
 
-    public int getId() {
+    public User() {
+        this.id = null;
+        this.nombre = null;
+        this.apellido = null;
+        this.run = null;
+        this.edad = 0;
+        this.telefono = null;
+    }
+    
+    
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -67,5 +80,8 @@ public class User extends Conexion {
         this.telefono = telefono;
     }
     
-    
+    public static User auth(HttpServletRequest request)
+    {
+        return (User) request.getSession(false).getAttribute("User");
+    }
 }
