@@ -191,7 +191,7 @@ public class Register extends HttpServlet {
                 ResultSet rs = pst.getGeneratedKeys();
                 rs.next();
                 out.println(rs);    
-                int userId = rs.getInt(1);
+                Long userId = rs.getLong(1);
                 
                 
                 
@@ -204,7 +204,7 @@ public class Register extends HttpServlet {
                 user.next();
                 
                 hs.setAttribute("User", new User(
-                                                user.getInt("id"), 
+                                                user.getLong("id"), 
                                                 user.getString("nombre"), 
                                                 user.getString("apellido"),
                                                 user.getString("run"), 
