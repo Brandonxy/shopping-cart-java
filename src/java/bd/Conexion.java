@@ -9,8 +9,6 @@ public class Conexion {
     
     protected static Connection conn = ConexionBD.getConexion();
     
-    protected static String table = null;
-
     private static Statement st;
     private static String query;
     
@@ -28,11 +26,12 @@ public class Conexion {
     }
     
     public static ResultSet all(String tableName, String orderBy) { 
+        
         try {
             
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             
-            String query = "select * from " + tableName + " order by id "  + orderBy;
+            query = "select * from " + tableName + " order by id "  + orderBy;
             
             ResultSet rs = st.executeQuery(query);
             
@@ -45,13 +44,13 @@ public class Conexion {
         return null;
     }
     
-    public static ResultSet find(String tableName, int id) {
+    public static ResultSet find(String tableName, Long id) {
         ResultSet rs = null;
         try {
             
-            Statement st = conn.createStatement();
+            st = conn.createStatement();
             
-            String query = "select * from "  + tableName + " where id=" + id;
+            query = "select * from "  + tableName + " where id=" + id;
             
             rs = st.executeQuery(query);
             
