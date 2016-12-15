@@ -2,7 +2,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="bd.Producto"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="cart.CartItem"%>
+<%@page import="comprafy.cart.CartItem"%>
 <%
     ResultSet productos = Producto.all("productos", "DESC");
 %>
