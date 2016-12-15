@@ -2,15 +2,15 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
         <servlet-name>updateCart</servlet-name>
-        <servlet-class>cart.UpdateCart</servlet-class>
+        <servlet-class>comprafy.cart.UpdateCart</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddItem</servlet-name>
-        <servlet-class>cart.AddItem</servlet-class>
+        <servlet-class>comprafy.cart.AddItem</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveUItem</servlet-name>
-        <servlet-class>cart.RemoveUItem</servlet-class>
+        <servlet-class>comprafy.cart.RemoveUItem</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
@@ -19,6 +19,18 @@
     <servlet>
         <servlet-name>CloseSession</servlet-name>
         <servlet-class>auth.CloseSession</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>auth.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResponderPregunta</servlet-name>
+        <servlet-class>comprafy.forum.ResponderPregunta</servlet-class>
+        <init-param>
+            <param-name>idPregunta</param-name>
+            <param-value/>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>updateCart</servlet-name>
@@ -39,6 +51,14 @@
     <servlet-mapping>
         <servlet-name>CloseSession</servlet-name>
         <url-pattern>/sign_out.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login_post.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResponderPregunta</servlet-name>
+        <url-pattern>/respond.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
