@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cart;
+package comprafy.cart;
 
 import bd.Producto;
 import java.io.IOException;
@@ -11,8 +11,6 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author unknown
  */
-public class AddItem extends HttpServlet {
+public class RemoveUItem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,79 +37,37 @@ public class AddItem extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            /*
-            ** Obtener la session
-            */
-            HttpSession hs = request.getSession(false);            
+            Long productId = Long.parseLong(request.getParameter("productId"));
             
-            if(hs.getAttribute("Cart") == null) {
-                hs = request.getSession(true);
-                hs.setAttribute("Cart", new LinkedList<CartItem>());
-            }
+            ResultSet p = Producto.find("productos", productId);
             
-            LinkedList<CartItem> cart  = (LinkedList<CartItem>) hs.getAttribute("Cart");
+            HttpSession hs = request.getSession(false);
             
+            LinkedList<CartItem> cartItems = (LinkedList<CartItem>) hs.getAttribute("Cart");
             
-            /*
-            ** Agregar el producto al carro
-            */
-            
-            
-            if(request.getParameter("productId") != null) {
-                
-                int productId = Integer.parseInt(request.getParameter("productId"));
-                
-                ResultSet p = Producto.find("productos", productId);
-                
-                try {
+            try {
+                if(p.next()) {
                     
-                    if(p.next()) {
-                        boolean exists = false;
+                    for(CartItem ci : cartItems) {
                         
-                        for(CartItem ci : cart) {
-                            if(ci.getId() == productId && p.getInt("stock") > 0 ) {
+                            /* El producto existe en la carro de compras */
+
+                            if(ci.getId() == productId) {
                                 
-                                /* El producto existe en el carro entonces
-                                ** actualizamos la cantidad y el stock
-                                */
-                                int aux = ci.getCantidad();
-                                ci.setCantidad(aux + 1);
-                                Producto.updateStock(p.getInt("stock") - 1, productId);
-                                exists = true;
+                                // Restore the quantity to the database.
+                                Producto.updateStock(p.getInt("stock") + ci.getCantidad(), productId);
+                                
+                                cartItems.remove(ci);
+                                
                             }
-                        }
-                        
-                        if(!exists) {
-                            if(p.getInt("stock") > 0) {
-                                
-                                cart.add(new CartItem(p.getInt("id"), 
-                                   p.getString("foto"), 
-                                   p.getString("nombre"),
-                                   p.getString("descripcion"), 
-                                   p.getInt("precio"), 1));
-                                
-                                /* 
-                                ** Actualizar el stock despues de
-                                ** agregar un producto al carro
-                                */
-                                Producto.updateStock(p.getInt("stock") - 1, productId);
-                            }
-                        }
-                        
-                        response.sendRedirect("cart.jsp");
                     
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(AddItem.class.getName()).log(Level.SEVERE, null, ex);
-                    out.println("exception" + ex);
                 }
-
-                    
                 
-            } else {
-                out.println(request.getParameter("productId"));
+                response.sendRedirect("index.jsp");
+            } catch(SQLException e) {
+                out.println("Ha habido un problema al borrar este elemento");
             }
-            
         }
     }
 

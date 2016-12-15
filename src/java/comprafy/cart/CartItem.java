@@ -1,4 +1,4 @@
-package cart;
+package comprafy.cart;
 
 import bd.Conexion;
 

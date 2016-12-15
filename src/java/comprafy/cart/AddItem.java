@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cart;
+package comprafy.cart;
 
 import bd.Producto;
 import java.io.IOException;
@@ -11,6 +11,8 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author unknown
  */
-public class RemoveUItem extends HttpServlet {
+public class AddItem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,37 +39,78 @@ public class RemoveUItem extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
-            int productId = Integer.parseInt(request.getParameter("productId"));
+            /*
+            ** Obtener la session
+            */
+            HttpSession hs = request.getSession(false);            
             
-            ResultSet p = Producto.find("productos", productId);
-            
-            HttpSession hs = request.getSession(false);
-            
-            LinkedList<CartItem> cartItems = (LinkedList<CartItem>) hs.getAttribute("Cart");
-            
-            try {
-                if(p.next()) {
-                    
-                    for(CartItem ci : cartItems) {
-                        
-                            /* El producto existe en la carro de compras */
-
-                            if(ci.getId() == productId) {
-                                
-                                // Restore the quantity to the database.
-                                Producto.updateStock(p.getInt("stock") + ci.getCantidad(), productId);
-                                
-                                cartItems.remove(ci);
-                                
-                            }
-                    
-                    }
-                }
-                
-                response.sendRedirect("index.jsp");
-            } catch(SQLException e) {
-                out.println("Ha habido un problema al borrar este elemento");
+            if(hs.getAttribute("Cart") == null) {
+                hs = request.getSession(true);
+                hs.setAttribute("Cart", new LinkedList<CartItem>());
             }
+            
+            LinkedList<CartItem> cart  = (LinkedList<CartItem>) hs.getAttribute("Cart");
+            
+            
+            /*
+            ** Agregar el producto al carro
+            */
+            
+            
+            if(request.getParameter("productId") != null) {
+                
+                Long productId = Long.parseLong(request.getParameter("productId"));
+                
+                ResultSet p = Producto.find("productos", productId);
+                
+                try {
+                    
+                    if(p.next()) {
+                        boolean exists = false;
+                        
+                        for(CartItem ci : cart) {
+                            if(ci.getId() == productId && p.getInt("stock") > 0 ) {
+                                
+                                /* El producto existe en el carro entonces
+                                ** actualizamos la cantidad y el stock
+                                */
+                                int aux = ci.getCantidad();
+                                ci.setCantidad(aux + 1);
+                                Producto.updateStock(p.getInt("stock") - 1, productId);
+                                exists = true;
+                            }
+                        }
+                        
+                        if(!exists) {
+                            if(p.getInt("stock") > 0) {
+                                
+                                cart.add(new CartItem(p.getInt("id"), 
+                                   p.getString("foto"), 
+                                   p.getString("nombre"),
+                                   p.getString("descripcion"), 
+                                   p.getInt("precio"), 1));
+                                
+                                /* 
+                                ** Actualizar el stock despues de
+                                ** agregar un producto al carro
+                                */
+                                Producto.updateStock(p.getInt("stock") - 1, productId);
+                            }
+                        }
+                        
+                        response.sendRedirect("cart.jsp");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(AddItem.class.getName()).log(Level.SEVERE, null, ex);
+                    out.println("exception" + ex);
+                }
+
+                    
+                
+            } else {
+                out.println(request.getParameter("productId"));
+            }
+            
         }
     }
 

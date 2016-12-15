@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cart;
+package comprafy.cart;
 
 import bd.Producto;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class UpdateCart extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             
-            int productId = Integer.parseInt(request.getParameter("productId"));
+            Long productId = Long.parseLong(request.getParameter("productId"));
             
             ResultSet p = Producto.find("productos", productId);
             
