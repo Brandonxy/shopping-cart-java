@@ -1,5 +1,5 @@
 <%@page import="java.util.LinkedList"%>
-<%@page import="cart.CartItem"%>
+<%@page import="comprafy.cart.CartItem"%>
 <%
     HttpSession hs = request.getSession(false);
     
