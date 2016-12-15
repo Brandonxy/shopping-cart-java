@@ -5,8 +5,8 @@ import java.sql.Statement;
 
 public class Producto extends Conexion {
 
-    protected static String table = "productos";
-    
+    private static String table = "productos";
+        
     private int id;
     private String foto;
     private String nombre;
@@ -80,7 +80,7 @@ public class Producto extends Conexion {
         this.stock = stock;
     }
     
-    public static boolean updateStock(int newStock, int productId) {
+    public static boolean updateStock(int newStock, Long productId) {
         try {
             Statement st = conn.createStatement();
             String sql = "update " + table + " set stock=" + newStock + " where id=" + productId;
