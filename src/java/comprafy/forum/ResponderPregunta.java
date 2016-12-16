@@ -34,29 +34,34 @@ public class ResponderPregunta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
+            HttpSession hs = request.getSession(false);
+            
             User authUser = User.auth(request);
 
             Long idPregunta = Long.parseLong(request.getParameter("idPregunta"));
             
-            if(!request.getParameter("respuesta").equals("")) {
-                Respuesta respuesta = new Respuesta();
-                respuesta.setPreguntaId(idPregunta);
-
-                respuesta.setClientId(authUser.getId());
-
-                respuesta.setRespuesta(request.getParameter("respuesta"));
-
-                Pregunta.guardarRespuesta(respuesta);
-                
+            if(authUser == null) {
+                hs.setAttribute("error", "Debes iniciar sesión para responder a esta pregunta.");
                 response.sendRedirect("foro/ver.jsp?id=" + idPregunta);
                 return;
             }
             
-            HttpSession hs = request.getSession(false);
-            hs.setAttribute("error", "El comentario no puede estar vacío.");
+            if(request.getParameter("respuesta").equals("")) {
+                hs.setAttribute("error", "El comentario no puede estar vacío.");
+                response.sendRedirect("foro/ver.jsp?id=" + idPregunta);
+                return;
+            }
             
+            Respuesta respuesta = new Respuesta();
+            respuesta.setPreguntaId(idPregunta);
+
+            respuesta.setClientId(authUser.getId());
+
+            respuesta.setRespuesta(request.getParameter("respuesta"));
+
+            Pregunta.guardarRespuesta(respuesta);
+
             response.sendRedirect("foro/ver.jsp?id=" + idPregunta);
-            
         }
     }
 
