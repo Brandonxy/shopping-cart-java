@@ -53,9 +53,12 @@
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <a href="add_item.do?productId=<%= productos.getInt("id") %>" class="btn btn-primary btn-block" role="button">
-                                                <i class="fa fa-shopping-cart"></i> Añadir
-                                            </a> 
+                                            <form action="add_item.do?productId=<%= productos.getInt("id") %>"
+                                            method="post">
+                                                <button type="submit" class="btn">
+                                                    <i class="fa fa-shopping-cart"></i> Añadir
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                     </div>
