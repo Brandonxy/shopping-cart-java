@@ -1,0 +1,86 @@
+
+.menu-lateral ul {
+    padding: 0px;
+}
+.menu-lateral ul li{
+    list-style: none;
+    border-left: 3px solid transparent;
+    padding-bottom: 5px;
+}
+.menu-lateral ul li a {
+    padding: 5px;
+    display: block !important;
+    color: #69707a;
+    font-weight: 400;
+    border-bottom: 1px solid #cacaca;
+    font-size: 14px !important;
+}
+.menu-lateral .titulo-cat {
+    text-transform: uppercase;
+    color: #cacaca;
+}
+
+.btn-discucion {
+    width: 100%;
+    display: inline-block;
+    padding: 10px 5px !important;
+}
+
+.cont-foro {
+    background: linear-gradient(to right,#F9F9F9,#fff 20px);
+    padding-left: 30px;
+    padding-top: 15px;
+}
+.item-foro {
+    padding-top: 10px;
+    /**background: linear-gradient(to right,#ccc,#fff 20px);*/
+}
+.item-foro .img-perfil {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+}
+.item-foro .cuerpo-item {
+    display: inline-block;
+    width: 100%;
+}
+.item-foro .cuerpo-item .titulo-item {
+    margin-top: 0;
+}
+.item-foro .titulo-item {
+    color: #4D545D;
+}
+.item-foro .categoria-item a {
+    color: #f0ad4e;
+}
+.item-foro .detalles {
+    text-transform: uppercase;
+}
+.item-foro .detalles .nombreusuario {
+    color: #f0ad4e;
+}
+
+/**
+    Respuestas
+/**/
+
+.cabecera-respuesta {
+    border: 1px solid #cacaca;
+    padding: 15px;
+    background: #f1f1f1;
+}
+.contenido-respuesta {
+    padding: 15px;
+    border: 1px solid #f1f1f1;
+}
+
+/* Botones */
+.titulo-item-inside {
+    display: inline-block;
+    width: 60%;
+    vertical-align: bottom;
+}
+.eliminar-pregunta {
+    display: inline-block;
+    vertical-align: top;
+}

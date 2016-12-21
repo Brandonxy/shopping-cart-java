@@ -10,12 +10,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-  
     Pregunta pregunta =  Pregunta.find(Long.parseLong(request.getParameter("id")));
     ArrayList<Categoria> categorias = Categoria.all("DESC");
     
     // Mensajes de error
     HttpSession old = request.getSession(false);
+    
     Object temp = old.getAttribute("error");
     
     old.removeAttribute("error");
@@ -31,116 +31,98 @@
             
             <%@include file="../includes/header.jsp"%>
             
-            <div class="container content">
+            <div class="content foro-ctn">
                 
-                <div class="row">
-                    <div class="col-md-3">
-                        
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button class="btn btn-block">Nueva discución</button>
-                            </div>
-                        </div>
-                        <br>
-                        <ul class="nav nav-pills nav-stacked text-left">
-                            <h4>Elige una categoria</h4>
-                            <% for(Categoria c : categorias) { %>
-                            <li><a href="<%= Url.linkTo("foro?categoria=" + c.getAlias()) %>"><%= c.getNombre() %></a></li>
-                            <% } %>
-                            
-                            
-                        </ul>
-                    </div>
-                    <div class="col-md-8">
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="title-forum"><strong><%= pregunta.getPregunta() %></strong></h3>
-                                <span class="text-muted date">
-                                    Publicado: <%= pregunta.getCreadoEl() %>
-                                </span>
-                                Por <strong><%= pregunta.getUser().getNombre() %></strong>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <p class="text-muted">
-                                    <%= pregunta.getDescripcion() %>
-                                </p>
-                            </div>
-                        </div>
-                        <br>
-
-                        <h4><%= pregunta.getRespuestasTotales() %> Respuestas</h4>
-                        <br>
-                        <% if(temp != null) { %>
-                            <div class="alert alert-danger">
-                                <%= temp %>
-                            </div>
-                        <% } %>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <% for(Respuesta respuesta : pregunta.getRespuestas()) { %>
-                                    <div class="row">
-
-                                      <div class="col-md-2">
-                                        <div class="thumbnail">
-                                            <img class="img-responsive" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Generic placeholder image">
-                                        </div>
-                                      </div>
-
-                                      <div class="col-md-10">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <strong>
-                                                    <%= respuesta.getUser().getNombre() %>
-                                                </strong> <span class="text-muted"><%= respuesta.getCreadoEl() %></span>
-                                            </div>
-                                            <div class="panel-body">
-                                                <%= respuesta.getRespuesta() %>
-                                            </div>
-                                        </div>
-                                      </div>
-
-                                    </div>
+                    <div class="seccion-lateral">
+                        <a href="<%= Url.linkTo("foro/crear.jsp") %>" class="btn btn-discucion">Nueva discución</a>
+                        <nav class="menu-lateral">
+                            <ul>
+                                <h4 class="titulo-cat">Elige una categoria</h4>
+                                <% for(Categoria c : categorias) { %>
+                                <li><a href="<%= Url.linkTo("foro?categoria=" + c.getAlias()) %>"><%= c.getNombre() %></a></li>
                                 <% } %>
+                            </ul>
+                        </nav>
+                    </div>
+                <div class="seccion-cont cont-foro">
+                    <h3 class="title-forum">Foro CompraFy</h3>
+
+                    <div class="item-foro">
+                        <div class="cuerpo-item">
+                            <h2 class="titulo-item">
+                                <div class="titulo-item-inside">
+                                    <%= pregunta.getPregunta() %>
+                                </div>
+                                <% if(User.auth(request) != null && pregunta.getClienteId() == User.auth(request).getId()) { %>
+                                    <a href="<%= Url.linkTo("eliminar_pregunta.do?id=" + pregunta.getId()) %>" 
+                                       class="btn btn-eliminar eliminar-pregunta">
+                                    Eliminar
+                                    </a>
+                                    
+                                    <a href="<%= Url.linkTo("foro/editar.jsp?id=" + pregunta.getId()) %>" 
+                                       class="btn btn-eliminar eliminar-pregunta">
+                                    Modificar 
+                                    </a>
+                                <% } %>
+                            </h2>
+                            <div class="detalles">
+                                <span class="texto-gris date">
+                                    Publicado: <%= pregunta.getCreadoEl() %></span>
+                                    Por <strong class="nombreusuario"><%= pregunta.getUser().getNombre() %></strong>
+                            </div>
+                            <p class="texto-gris">
+                                <%= pregunta.getDescripcion() %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="respuestas-ctn">
+                        
+                            
+                        <%@include file="../includes/mensajes.jsp"%>
+                        
+                        <br>
+                        Respuestas (<%= pregunta.getRespuestasTotales() %>) 
+                        <div class="cont-respuestas">
+                            <% for(Respuesta respuesta : pregunta.getRespuestas()) { %>
+                            <div class="respuesta-item">
+                                <div class="cabecera-respuesta">
+                                    <strong>
+                                    <%= respuesta.getUser().getNombre() %>
+                                    </strong> 
+                                    &middot;
+                                    <span class="texto-gris">Publicada:  <%= respuesta.getCreadoEl() %></span>
+                                    <br>
+                                </div>
+                                <div class="contenido-respuesta">
+                                    <%= respuesta.getRespuesta() %>
+                                </div>
 
                             </div>
+                            <br>
+                            <% } %>
                         </div>
-                                
-                                
-                        <div class="row">
-                            <div class="col-md-12">
-                                <form action="<%= Url.linkTo("respond.do?idPregunta=" + pregunta.getId()) %>" method="post">
-                                    <div class="row">
+                        <div class="formulario-responder">
+                            <form action="<%= Url.linkTo("respond.do?idPregunta=" + pregunta.getId()) %>" method="post">
+                                <div class="row">
 
-                                      <div class="col-md-2">
-                                        <div class="thumbnail">
-                                            <img class="img-responsive" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Generic placeholder image">
-                                        </div>
-                                      </div>
-
-                                      <div class="col-md-10">
+                                    <div class="col-md-10">
                                         <div class="panel panel-default">
                                             <div class="panel-body">
-                                                <textarea class="form-control" name="respuesta" placeholder="Responder a este topico..."></textarea>
+                                                <textarea class="textfield" name="respuesta" placeholder="Responder a este topico..."></textarea>
                                             </div>
                                             <div class="panel-footer">
                                                 <button type="submit" class="btn btn-success">Responder</button>
                                             </div>
                                         </div>
-                                      </div>
-
                                     </div>
-                                </form>
-                            </div>
+
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
 
             <%@include file="../includes/footer.jsp" %>

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author unknown
+ * @author Brandon
  */
 public class Login extends HttpServlet {
 
@@ -67,7 +67,7 @@ public class Login extends HttpServlet {
                                                 user.getString("run"), 
                                                 user.getInt("edad"), 
                                                 user.getString("telefono")));
-                    response.sendRedirect("administrador/BienvenidaAdmin.jsp");
+                    response.sendRedirect("foro/");
                 }
                 else
                 {

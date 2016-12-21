@@ -56,7 +56,7 @@ public class Categoria extends Conexion {
             
             Statement st = conn.createStatement();
             
-            String Query = "select nombre, alias from " + table;
+            String Query = "select id, nombre, alias from " + table;
             
             ResultSet rs = st.executeQuery(Query);
             
@@ -64,6 +64,7 @@ public class Categoria extends Conexion {
             
             while(rs.next()) {
                 Categoria categoria = new Categoria();
+                categoria.setId(rs.getLong("id"));
                 categoria.setAlias(rs.getString("alias"));
                 categoria.setNombre(rs.getString("nombre"));
                 

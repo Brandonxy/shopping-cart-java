@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package comprafy.forum;
 
 import bd.User;
@@ -18,7 +13,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author unknown
  */
-public class ResponderPregunta extends HttpServlet {
+public class PublicarPregunta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,50 +31,46 @@ public class ResponderPregunta extends HttpServlet {
             
             HttpSession hs = request.getSession(false);
             
-            User authUser = User.auth(request);
-
-            Long idPregunta = Long.parseLong(request.getParameter("idPregunta"));
+            Long categoriaId = Long.parseLong(request.getParameter("categoriaId"));
             
-            if(authUser == null) {
-                hs.setAttribute("error", "Debes iniciar sesión para responder a esta pregunta.");
-                response.sendRedirect("foro/ver.jsp?id=" + idPregunta);
+            String preguntaText = request.getParameter("pregunta");
+            String descripcion = request.getParameter("descripcion");
+            
+            hs.setAttribute("old_pregunta", preguntaText);
+            hs.setAttribute("old_descripcion", descripcion);
+            
+            if(descripcion.equals("")) {
+                hs.setAttribute("error", "La descripción no puede estar vacia.");
+                response.sendRedirect("foro/crear.jsp");
+                return;
+            }
+            if(descripcion.length() > 400) {
+                hs.setAttribute("error", "La descripción no puede tener mas de 400 letra.s");
+                response.sendRedirect("foro/crear.jsp");
                 return;
             }
             
-            if(request.getParameter("respuesta").equals("")) {
-                hs.setAttribute("error", "El comentario no puede estar vacío.");
-                response.sendRedirect("foro/ver.jsp?id=" + idPregunta);
+            if(preguntaText.equals("")) {
+                hs.setAttribute("error", "La pregunta no puede estar vacía.");
+                response.sendRedirect("foro/crear.jsp");
+                return;
+            }
+            if(preguntaText.length() > 100) {
+                hs.setAttribute("error", "La pregunta no puede tener mas de 100 letras.");
+                response.sendRedirect("foro/crear.jsp");
                 return;
             }
             
-            Respuesta respuesta = new Respuesta();
-            respuesta.setPreguntaId(idPregunta);
-
-            respuesta.setClientId(authUser.getId());
-
-            respuesta.setRespuesta(request.getParameter("respuesta"));
- 
-            Pregunta.guardarRespuesta(respuesta);
-
-            response.sendRedirect("foro/ver.jsp?id=" + idPregunta);
+            Pregunta pregunta = new Pregunta();
+            pregunta.setCategoriaId(categoriaId);
+            pregunta.setPregunta(preguntaText);
+            pregunta.setDescripcion(descripcion);
+            
+            out.println(User.auth(request).guardarPregunta(pregunta, request));
+            
+            response.sendRedirect("foro/");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *

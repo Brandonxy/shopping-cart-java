@@ -1,6 +1,13 @@
 
 package bd;
 
+import comprafy.forum.Pregunta;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 public class User extends Conexion {
@@ -83,5 +90,25 @@ public class User extends Conexion {
     public static User auth(HttpServletRequest request)
     {
         return (User) request.getSession(false).getAttribute("User");
+    }
+    
+    public static int guardarPregunta(Pregunta pregunta, HttpServletRequest request) {
+        
+        try {
+            String insert = "insert into preguntas(categoria_id, cliente_id, pregunta, descripcion)"
+                    + " values (?,?,?,?)";
+            
+            PreparedStatement pst = conn.prepareStatement(insert);
+            pst.setLong(1, pregunta.getCategoriaId());
+            pst.setLong(2, User.auth(request).getId());
+            pst.setString(3, pregunta.getPregunta());
+            pst.setString(4, pregunta.getDescripcion());
+            
+            return pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }

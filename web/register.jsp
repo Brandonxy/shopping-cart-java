@@ -101,7 +101,7 @@
                                         <label>Edad</label>
                                         <input type="number" name="edUs" size="30" 
                                                placeholder="ej. 40"  class="form-control textfield" 
-                                               value="<% if(oldEdad != null) { %><%= oldEdad %><% } %>"/>
+                                               value="<% if(oldEdad != null) { %>} <%= oldEdad %><% } %>"/>
                                     </div>
                                     <br/>
                                 </div>

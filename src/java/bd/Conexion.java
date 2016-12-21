@@ -43,7 +43,6 @@ public class Conexion {
         
         return null;
     }
-    
     public static ResultSet find(String tableName, Long id) {
         ResultSet rs = null;
         try {

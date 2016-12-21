@@ -1,0 +1,11 @@
+/* 
+    Author     : Brandon G.
+*/
+.contenido-login {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.seccion.login  .titulo {
+    background: #f0ad4e; 
+}

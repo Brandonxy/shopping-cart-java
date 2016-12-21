@@ -9,22 +9,25 @@
 <html>
     <head>
         <head>
-        <link rel="stylesheet" type="text/css" href="../assets/css/app.css">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <%@include file="../includes/head.jsp" %>
         <title>Listado de clientes</title>
     </head>
+        <style>
+            table {
+                background: #ffffff;
+                border: 1px solid #c0c0c0;
+            }
+            td {
+                text-align: left;
+                padding: 15px;
+                border-bottom: 1px solid #c0c0c0;
+            }
+        </style>
     </head>
     <body>
         <%@include file="../includes/header.jsp" %>
-        <div class="container">
-            <div class="row">
-                
-                <div class="col-md-4 col-md-offset-1">
+        <div class="content">
+            <div class="col-md-4 col-md-offset-1">
                     <h3>Listado de clientes</h3><hr>
                     <table class="table table-bordered">
                         <tr>
@@ -33,7 +36,7 @@
                             <td><b>Apellido</b></td>
                             <td><b>Edad</b></td>
                             <td><b>Teléfono</b></td>
-                            <td><b>Fecha_registro</b></td>
+                            <td><b>Registro</b></td>
                             <td><b>Estado</b></td>
                             <td><b>Operaciones</b></td>                
                         </tr>
@@ -47,26 +50,26 @@
                             <td align="center"><%= users.getString("telefono") %></td>
                             <td align="center"><%= users.getDate("creado_el") %></td>
                             <% if(users.getShort("activado") == 0) { %>
-                                <td align="center"><label class="label label-danger">Desactivado</label></td>
+                                <td align="center"><label class="label label-error">Desactivado</label></td>
                             <% } else { %>   
-                                <td align="center"><label class="label label-success">Activado</label></td>
+                                <td align="center"><label class="label label-verde">Activado</label></td>
                             <% } %>
                             <td>
-                                <a href="EliminarUsuario.jsp?id=<%= users.getInt("id") %>">
-                                    <img src="images/delete.png" width="16" height="16" />
-                                </a>
-                                &nbsp;
-                                <a href="FormModificarUsuario.jsp?id=<%= users.getInt("id") %>">
-                                    <img src="images/modified.png" width="16" height="16" />
+                                <a href="FormModificarUsuario.jsp?id=<%= users.getInt("id") %>" class="btn">
+                                    Editar
                                 </a>
 
-                            </td>                
+                            </td>
+                            <td>
+                                <a href="EliminarUsuario.jsp?id=<%= users.getInt("id") %>" class="btn btn-eliminar">
+                                    Eliminar
+                                </a>
+                            </td>
                         </tr>
                         <% } %>
 
                     </table>
                 </div>
-            </div>
         </div>
     </body>
 </html>

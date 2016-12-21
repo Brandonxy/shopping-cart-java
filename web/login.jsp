@@ -10,19 +10,22 @@
             
             <%@include file="includes/header.jsp" %>
             
-            <div class="container content">
+            <div class="content">
                 <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h1>Inicia <strong>Sesión</strong></h1>
-                    </div>
-                    <div class="col-md-4 col-md-offset-4 text-center">
-                        <hr>
-                        <form class="form-vertical" role="form" method="POST" 
+                    <div class="seccion login">
+                        <div class="titulo">
+                            Inicia sesión
+                        </div>
+                        <div class="contenido-sec contenido-login">
+                            <form class="form-vertical" role="form" method="POST" 
                               action="login_post.do">
 
                                     <div class="form-group">
                                         <label for="email">Run</label>
-                                        <input id="email" type="text" class="form-control textfield" name="run" required autofocus>
+                                        <input id="email" 
+                                               type="text" 
+                                               class="textfield" 
+                                               name="run" required autofocus>
                                     </div>
 
                                     <div class="form-group">
@@ -47,6 +50,7 @@
                                         </button>
                                     </div>
                                 </form>
+                        </div>
                     </div>
                 </div>
             </div>

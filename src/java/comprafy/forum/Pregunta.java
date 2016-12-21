@@ -6,12 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Pregunta extends Conexion {
     
@@ -152,16 +149,18 @@ public class Pregunta extends Conexion {
         
         return 0;
     }
-    
-    
-    
-    public static ArrayList<Pregunta> all(String orderBy)
+
+    public static ArrayList<Pregunta> todas(String orderBy, String valueWhere)
     {
         try {
             
-            Statement st = conn.createStatement();
             
-            String Query = "select clientes.*, c.nombre as nombre_categoria, c.alias , p.id as idPregunta,p.categoria_id,p.cliente_id,p.pregunta,p.descripcion,p.creado_el from preguntas p, categorias c, clientes where p.categoria_id = c.id and p.cliente_id = clientes.id";
+            
+            String Query = "select clientes.*, c.nombre as nombre_categoria, c.alias, " +
+                    "p.id as idPregunta,p.categoria_id,p.cliente_id,p.pregunta,p.descripcion,p.creado_el " +
+                    "from preguntas p, categorias c, clientes where p.categoria_id = c.id and p.cliente_id = clientes.id " + ((!valueWhere.equals("") ? " and c.alias = '" + valueWhere  + "'" : "")) +" order by p.id DESC ";
+            
+            Statement st = conn.createStatement();
             
             ResultSet rs = st.executeQuery(Query);
             
@@ -277,6 +276,40 @@ public class Pregunta extends Conexion {
         }
         
         return null;
+    }
+    
+    public static  int eliminar(Long id) {
+        
+        try {
+            String delete = "delete from preguntas where preguntas.id = " + id;
+            Statement pst = conn.createStatement();
+            
+            return pst.executeUpdate(delete);
+            
+            
+        } catch (SQLException ex) {
+            
+        }
+        return 0;
+    }
+    
+    public static int modificar(Long id, Long categoriaId, String pregunta, String descripcion) {
+        
+       try {
+            String sql = "update preguntas set categoria_id = ?, pregunta=?, descripcion=?"
+                    + " where id = ?" ;
+            PreparedStatement pst = conn.prepareStatement(sql);
+            
+            pst.setLong(1, categoriaId);
+            pst.setString(2, pregunta);
+            pst.setString(3, descripcion);
+            pst.setLong(4, id);
+            return pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            
+        }
+        return 0; 
     }
         
 }

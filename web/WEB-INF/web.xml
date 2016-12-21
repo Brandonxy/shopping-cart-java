@@ -32,6 +32,18 @@
             <param-value/>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>PublicarPregunta</servlet-name>
+        <servlet-class>comprafy.forum.PublicarPregunta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarPregunta</servlet-name>
+        <servlet-class>comprafy.forum.EliminarPregunta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModificarPregunta</servlet-name>
+        <servlet-class>comprafy.forum.ModificarPregunta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>updateCart</servlet-name>
         <url-pattern>/update_cart.do</url-pattern>
@@ -59,6 +71,18 @@
     <servlet-mapping>
         <servlet-name>ResponderPregunta</servlet-name>
         <url-pattern>/respond.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicarPregunta</servlet-name>
+        <url-pattern>/nueva_pregunta.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarPregunta</servlet-name>
+        <url-pattern>/eliminar_pregunta.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarPregunta</servlet-name>
+        <url-pattern>/modifiar_pregunta.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
