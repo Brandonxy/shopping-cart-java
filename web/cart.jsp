@@ -4,7 +4,10 @@
     HttpSession hs = request.getSession(false);
     
     LinkedList<CartItem> cartItems = (LinkedList<CartItem>) hs.getAttribute("Cart");
+        
+    Object temp = hs.getAttribute("error");
     
+    hs.removeAttribute("error");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,115 +23,65 @@
             <%@include file="includes/header.jsp" %>
             
             <div class="container content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-warning">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <h4><span class="fa fa-shopping-cart"></span> Carro de compras</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="panel-body">
+                <h4><span class="fa fa-shopping-cart"></span> Carro de compras</h4>
+                
+               
+                <%@include file="includes/mensajes.jsp" %>
+                <table class="tabla-productos">
+                    <thead>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Acciones</th> 
+                    </thead>
+                    <tbody>
+                        <% if(cartItems != null) { %>
+                            <% for(CartItem p : cartItems) { %>
                                 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        Producto
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="col-xs-2 text-right">
-                                           Unidad 
-                                        </div>
-                                        <div class="col-xs-2">
-                                            Cantidad
-                                        </div>
-                                        <div class="col-xs-2">
-                                            Subtotal
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <% if(cartItems != null) { %>
-                                    <% for(CartItem p : cartItems) { %>
+                                <tr>
+                                    
+                                    <td>
+                                        <img 
+                                            class="img-p" src="<%= Url.linkTo("images/") + p.getFoto() %>">
+                                    </td>
 
-                                        <div class="row">
-                                            <div class="col-xs-2"><img class="img-responsive" src="<%= Url.linkTo("images/") + p.getFoto() %>">
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <h4 class="product-name">
-                                                    <strong><%= p.getNombre() %></strong>
-                                                </h4>
+                                    <td>
+                                        <h4 class="product-name"><strong><%= p.getNombre() %></strong></h4>
+                                    </td>
 
-                                                <h4>
-                                                    <small><%= p.getDescripcion() %></small>
-                                                </h4>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="col-xs-2 text-right">
-                                                    <h6>
-                                                        <strong> <i class="fa fa-dollar"></i> <%= p.getPrecio() %> 
-                                                            <span class="text-muted">x</span>
-                                                        </strong>
-                                                    </h6>
-                                                </div>
+                                    <td><h4><small><%= p.getDescripcion() %></small></h4></td>
 
-                                                <form action="update_cart.do" method="get">
-                                                    <input type="hidden" name="productId" value="<%= p.getId()%>">
+                                    <td><strong> <i class="fa fa-dollar"></i> <%= p.getPrecio() %><span class="text-muted">x</span></strong></td>
+                                    
+                                <form action="update_cart.do" method="get">
+                                    <input type="hidden" name="productId" value="<%= p.getId()%>">
+                                    <td><div class="col-xs-2"><input type="text" class="textfield" name="cantidad" value="<%= p.getCantidad() %>"></div>
+                                        <button type="submit" class="btn">Actualizar</button></td>
+                                </form>
+                                    <td>
+                                    <strong> <i class="fa fa-dollar"></i><%= p.getPrecio() * p.getCantidad() %></strong>
+                                </td>
 
-                                                    <div class="col-xs-2">
-                                                        <input type="text" class="form-control input-sm" name="cantidad" value="<%= p.getCantidad() %>">
-                                                    </div>
-                                                    <div class="col-xs-2">
-                                                        <h6>
-                                                            <strong> <i class="fa fa-dollar"></i> 
-                                                                <%= p.getPrecio() * p.getCantidad() %>
-                                                            </strong>
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-xs-2">
-                                                        <button type="submit" class="btn btn-xs">
-                                                            <span class="fa fa-refresh"> </span>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                                <div class="col-xs-2">
-                                                    <a href="remove_item.do?productId=<%= p.getId() %>" class="btn btn-link btn-xs">
-                                                        <span class="fa fa-trash"> </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    <% } %>
-                                <% } else  { %>
-                                    <div class="alert alert-info">
-                                        Tu carro de compras esta vacío.
-                                    </div>
-                                <% } %>
+                                    <td><a href="remove_item.do?productId=<%= p.getId() %>" class="btn btn-link btn-xs"><span class="fa fa-trash"> </span></a></td>
+
+
+                                </tr>
+                            <% } %>
+                        <% } else  { %>
+                            <div class="alert alert-info">
+                                Tu carro de compras esta vacío.
                             </div>
-                            <div class="panel-footer">
-                                <div class="row text-center">
-                                    <div class="col-xs-9">
-                                        <h4 class="text-right">
-                                            Total 
-                                            <strong>
-                                                $
-                                            </strong>
-                                        </h4>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <button type="button" class="btn btn-success btn-block">
-                                                Checkout
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-			</div>
-                    </div>
-                </div>
+                        <% } %>
+
+                    </tbody>
+                </table>
+                        
+                        
+                    
+                                    
             </div>
 
             <%@include file="includes/footer.jsp" %>

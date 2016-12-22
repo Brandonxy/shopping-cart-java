@@ -31,40 +31,28 @@
                 <div class="row">
                     <% if(productos != null) { %>
                         <% while(productos.next()) { %>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="thumbnail">
-                                    <img src="<%= Url.linkTo("images/") + productos.getString("foto") %>" alt="..." class="img-responsive img-product">
-                                    <div class="caption">
-                                        <p class="product-title">
-                                            <%= productos.getString("nombre") %>
-                                        </p>
+                        <div class="producto" style="max-width:400px;">
+                            <img src="<%= Url.linkTo("images/") + productos.getString("foto") %>" alt="..." class="img-responsive img-product">
+                            <div class="caption">
+                                <p class="product-title">
+                                    <%= productos.getString("nombre") %>
+                                </p>
 
-                                    <p class="product-desc"><%= productos.getString("descripcion") %></p>
+                                <p class="product-desc"><%= productos.getString("descripcion") %></p>
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="text-muted">Stock: </label>    
-                                            <span><%= productos.getInt("stock") %></span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <strong>$ <%= productos.getInt("precio") %></strong>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <form action="add_item.do?productId=<%= productos.getInt("id") %>"
-                                            method="post">
-                                                <button type="submit" class="btn">
-                                                    <i class="fa fa-shopping-cart"></i> Añadir
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </div>
+                                        <label class="texto-gris">Stock: </label>    
+                                        <span><%= productos.getInt("stock") %></span>
+                                        <strong>$ <%= productos.getInt("precio") %></strong>
+                                <hr>
+                                <form action="add_item.do?productId=<%= productos.getInt("id") %>"
+                                        method="post">
+                                    <button type="submit" class="btn">
+                                        <i class="fa fa-shopping-cart"></i> Añadir
+                                    </button>
+                                </form>
                             </div>
-                            <% } %>
+                        </div>
+                        <% } %>
                     <% } %>
                 </div>
 

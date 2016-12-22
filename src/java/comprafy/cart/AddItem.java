@@ -33,7 +33,6 @@ public class AddItem extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
             /*
             ** Obtener la session
             */
@@ -41,7 +40,7 @@ public class AddItem extends HttpServlet {
             
             if(hs.getAttribute("Cart") == null) {
                 hs = request.getSession(true);
-                hs.setAttribute("Cart", new LinkedList<CartItem>());
+                hs.setAttribute("Cart", new LinkedList<>());
             }
             
             LinkedList<CartItem> cart  = (LinkedList<CartItem>) hs.getAttribute("Cart");
@@ -91,12 +90,14 @@ public class AddItem extends HttpServlet {
                                 */
                                 Producto.updateStock(p.getInt("stock") - 1, productId);
                             }
+                            else {
+                                hs.setAttribute("error", "sin stock disponible");
+                            }
                         }
                         
                         response.sendRedirect("cart.jsp");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(AddItem.class.getName()).log(Level.SEVERE, null, ex);
                     out.println("exception" + ex);
                 }
 

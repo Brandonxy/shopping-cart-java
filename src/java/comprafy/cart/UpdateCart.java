@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package comprafy.cart;
 
 import bd.Producto;
@@ -21,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author unknown
+ * @author BrandonG
  */
 public class UpdateCart extends HttpServlet {
 
@@ -38,7 +33,6 @@ public class UpdateCart extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
             
             Long productId = Long.parseLong(request.getParameter("productId"));
             

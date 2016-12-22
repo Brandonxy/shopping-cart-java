@@ -41,8 +41,12 @@ public class Login extends HttpServlet {
             
             String run = request.getParameter("run");
             String pass = request.getParameter("password");
-
-            HttpSession hs = request.getSession(true);
+            HttpSession hs;
+            if(request.getSession(false) == null) {
+                 hs = request.getSession(true);
+            } else {
+                hs = request.getSession(false);
+            }
 
             try
             {
