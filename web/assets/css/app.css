@@ -198,8 +198,15 @@ hr {
 /*
     Products home
 */
-
-
+.tabla-productos {
+    border: 1px solid #f1f1f1;
+}
+.tabla-productos td {
+    padding:20px;
+}
+.img-p {
+    max-width: 100px;
+}
 .product-title {
     font-size: 16px;
     text-align: center;
