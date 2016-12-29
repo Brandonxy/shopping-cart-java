@@ -15,27 +15,20 @@
     <body>
         <div class="wrapper">
             <%@include file="includes/header.jsp" %>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2 text-center about-container">
-                        <h1>Somos <strong>CompraFy</strong></h1>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <i class="fa fa-shopping-cart shp-cart-icon fa-5x"></i>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="about-list">
-                                    <li><i class="fa fa-check"></i> Comercializamos para Chile y el Mundo</li>
-
-                                    <li><i class="fa fa-check"></i> No. 1 en despacho express</li>
-
-                                    <li><i class="fa fa-check"></i> Rapidez, como ningún otro</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <div class="content sobre-nosotros">
+                <div class="titulo">
+                    <h2>Sobre el proyecto</h2>
                 </div>
+                <div class="sobre-nosotros-left">
+                    <i class="fa fa-shopping-cart fa-5x icon-about"></i>
+                </div>
+                <ul class="about-list">
+                    <li><i class="fa fa-check"></i> Comercializamos para Chile y el Mundo</li>
+
+                    <li><i class="fa fa-check"></i> No. 1 en despacho express</li>
+
+                    <li><i class="fa fa-check"></i> Rapidez, como ningún otro</li>
+                </ul>
             </div>
             <%@include file="includes/footer.jsp" %>
         </div>

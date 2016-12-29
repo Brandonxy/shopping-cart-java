@@ -54,6 +54,27 @@ hr {
     transition: .4s ease-in-out all;
 }
 
+.sobre-nosotros{
+    text-align: center;
+    padding-top: 100px;
+    min-height: 350px;
+}
+.sobre-nosotros .about-list {
+    display: inline-block;
+    vertical-align: top;
+}
+.sobre-nosotros .sobre-nosotros-left {
+    display: inline-block;
+    width: 300px;
+}
+.sobre-nosotros-left .icon-about {
+    font-size: 10em !important; 
+    color: #f57900;
+}
+.sobre-nosotros .titulo {
+    margin-bottom: 50px;
+}
+
 
 .label {
     padding: 5px;
