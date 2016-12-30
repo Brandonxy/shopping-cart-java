@@ -1,7 +1,4 @@
-# TallerProgramacion2
-Tienda online Taller de programación 2 - Inacap
-
-# CompraFy
+# Shopping cart built in java
 
 # Database support
 
